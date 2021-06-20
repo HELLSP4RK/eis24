@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:latest
+    volumes:
+      - ./.pgsql/database:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_DB: eis
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+
+      TZ: 'GMT+3'
+      PGTZ: 'GMT+3'
+    ports:
+      - 5432:5432
