@@ -8,11 +8,11 @@ from first.models import Action
 
 
 def show_actions_group_by_user(request):
-    actions = Action.objects.values('session__user__number', 'type')\
+    actions_queryset = Action.objects.values('session__user__number', 'type')\
         .annotate(last=Max('created_at'), count=Count('type')).order_by('session__user__number')
 
     data, numbers = [], []
-    for action in actions:
+    for action in actions_queryset:
         number = action['session__user__number']
         actions = {
             'type': action['type'],
