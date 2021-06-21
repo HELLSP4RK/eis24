@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import DetailView
-from django.views.generic.base import ContextMixin
 
 from second.models import *
 
@@ -43,11 +41,7 @@ class UnresolvedPaymentsView(View):
         return render(request, 'index.html', context)
 
     def _get_early_date_accruals(self, payment):
-        early_date_accruals = []
-        for accrual in self.accruals:
-            if accrual.date < payment.date:
-                early_date_accruals.append(accrual)
-        return early_date_accruals
+        return [accrual for accrual in self.accruals if accrual.date < payment.date]
 
     def _add_to_accordance(self, accrual, payment):
         self.accordance.append((accrual, payment))
