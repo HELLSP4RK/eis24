@@ -2,7 +2,6 @@ import json
 
 from django.db.models import Max, Count
 from django.http import HttpResponse
-from django.shortcuts import render
 
 from first.models import Action
 
